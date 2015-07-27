@@ -1,4 +1,5 @@
 #include "lib5110.h"
+#include "res_font.h"
 
 void
 lcd_init(void)
@@ -54,7 +55,7 @@ lcd_write_byte(const char operation_type, const unsigned char data)
     digitalWrite(LCD_CE, HIGH);
 }
 
-void
+const char *
 lcd_draw_bitmap(const char *map, char x0, char y0, const char x_size, const char y_size)
 {
     char bytes = (y_size + 7) >> 3;
@@ -65,23 +66,24 @@ lcd_draw_bitmap(const char *map, char x0, char y0, const char x_size, const char
         }
         y0++;
     }
+    return map;
 }
 
-inline char
-lcd_print_char(char c)
+inline const char
+lcd_print_char(const char c)
 {
-    c -= 32;
+    int i = c - 32;
     for (int line = 0; line < 6; line++) {
-        lcd_write_byte(DATA, font[c][line]);
+        lcd_write_byte(DATA, font[i][line]);
     }
     return c;
 }
 
-inline char *
+inline const char *
 lcd_print_string(const char *src, const unsigned char x, const unsigned char y_byte)
 {
     lcd_set_position(x, y_byte);
-    for (char *ptr = src; *ptr; lcd_print_char(*ptr++));
+    for (char *ptr = (char *)src; *ptr; lcd_print_char(*ptr++));
     return src;
 }
 

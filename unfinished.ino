@@ -1,11 +1,7 @@
+#include "res.h"
 #include "pins_config.h"
 #include "lib5110.h"
 #include "IRremote.h"
-
-#include "res_font.h"
-#include "res_logo.h"
-#include "res_signals.h"
-#include "res_messages.h"
 
 IRrecv irrecv(RECV_PIN);
 decode_results results;

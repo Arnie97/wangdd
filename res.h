@@ -1,5 +1,10 @@
-#ifndef _MESSAGES_INCLUDED_
-#define _MESSAGES_INCLUDED_
+#ifndef _RESOURCES_INCLUDED_
+#define _RESOURCES_INCLUDED_
+
+#include <avr/pgmspace.h>
+#include "res_font.h"
+#include "res_signals.h"
+#include "res_logo.h"
 
 const char *messages[5] = {
     "Signal received",
@@ -22,4 +27,4 @@ const char *signals[9] = {
     signal_highway
 };
 
-#endif /* _MESSAGES_INCLUDED_ */
+#endif /* _RESOURCES_INCLUDED_ */
