@@ -17,13 +17,11 @@ setup(void)
     pinMode(12, OUTPUT);
     digitalWrite(12, HIGH);
     lcd_draw_bitmap(logo, 8, 0, 68, 24);
-    delay(800);
-    lcd_print_string("Loading.", 10, 4);
-    delay(800);
-    lcd_print_string("Loading..", 10, 4);
-    delay(800);
-    lcd_print_string("Loading...", 10, 4);
-    delay(800);
+    lcd_print_string("Loading", 10, 4);
+    for (int i = 0; i < 3; i++) {
+        lcd_print_char('.');
+        delay(800);
+    }
     digitalWrite(12, LOW);
     lcd_clear();
 

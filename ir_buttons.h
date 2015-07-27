@@ -10,7 +10,7 @@ const unsigned long buttons[] PROGMEM = {
     0x0449E79F, // 6#
     0xE318261B, // shutdown
     0x00511DBB, // mode
-    0xEE886D7F // mute
+    0xEE886D7F  // mute
 };
 
 #endif /* _IR_BUTTONS_INCLUDED_ */
