@@ -1,7 +1,6 @@
 #ifndef _RESOURCES_INCLUDED_
 #define _RESOURCES_INCLUDED_
 
-#include <avr/pgmspace.h>
 #include "res_font.h"
 #include "res_signals.h"
 #include "res_logo.h"

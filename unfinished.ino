@@ -1,5 +1,7 @@
+#include <avr/pgmspace.h>
 #include "res.h"
 #include "pins_config.h"
+#include "ir_buttons.h"
 #include "lib5110.h"
 #include "IRremote.h"
 
@@ -43,22 +45,14 @@ loop(void)
     if (irrecv.decode(&results)) {
         Serial.println(results.value, HEX);
 
-        int button = 0;
-        switch (results.value) {
-        case 0xEE886D7F: button++; // mute
-        case 0x00511DBB: button++; // mode
-        case 0xE318261B: button++; // shutdown
-        case 0x0449E79F: button++; // 6#
-        case 0x488F3CBB: button++; // 5#
-        case 0x8C22657B: button++; // 4#
-        case 0x6182021B: button++; // 3#
-        case 0x3D9AE3F7: button++; // 2#
-        case 0x9716BE3F: button++; // 1#
-            lcd_clear();
-            digitalWrite(12, HIGH);
-            lcd_print_string(messages[button <= 6? 1: button - 5], 20, 4);
-            lcd_draw_bitmap(signals[button], 0, 0, 84, 24);
-            delay(2000);
+        for (int i = sizeof(buttons); i; i--) {
+            if (buttons[i] == results.value) {
+                lcd_clear();
+                digitalWrite(12, HIGH);
+                lcd_print_string(messages[i <= 6? 1: i - 5], 20, 4);
+                lcd_draw_bitmap(signals[i], 0, 0, 84, 24);
+                delay(2000);
+            }
         }
 
         irrecv.resume();  // Receive the next value
