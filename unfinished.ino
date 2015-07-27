@@ -44,7 +44,7 @@ loop(void)
         Serial.println(results.value, HEX);
 
         for (int i = sizeof(buttons); i; i--) {
-            if (buttons[i] == results.value) {
+            if (pgm_read_dword(buttons + i) == results.value) {
                 lcd_clear();
                 digitalWrite(12, HIGH);
                 lcd_print_string(messages[i <= 6? 1: i - 5], 20, 4);

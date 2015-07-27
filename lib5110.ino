@@ -62,7 +62,7 @@ lcd_draw_bitmap(const char *map, char x0, char y0, const char x_size, const char
     for (char current_byte = 0; current_byte < bytes; current_byte++) {
         lcd_set_position(x0, y0);
         for (char i = 0; i < x_size; i++) {
-            lcd_write_byte(DATA, map[i + current_byte * x_size]);
+            lcd_write_byte(DATA, pgm_read_byte(map + i + current_byte * x_size));
         }
         y0++;
     }
@@ -74,7 +74,7 @@ lcd_print_char(const char c)
 {
     int i = c - 32;
     for (int line = 0; line < 6; line++) {
-        lcd_write_byte(DATA, font[i][line]);
+        lcd_write_byte(DATA, pgm_read_byte(&font[i][line]));
     }
     return c;
 }
@@ -86,4 +86,3 @@ lcd_print_string(const char *src, const unsigned char x, const unsigned char y_b
     for (char *ptr = (char *)src; *ptr; lcd_print_char(*ptr++));
     return src;
 }
-
